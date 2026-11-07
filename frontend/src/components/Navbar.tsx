@@ -33,7 +33,8 @@ export const Navbar: React.FC = () => {
   const checkHealth = useCallback(async () => {
     setIsRefreshing(true)
     try {
-      const baseUrl = import.meta.env.VITE_API_URL ? String(import.meta.env.VITE_API_URL).replace(/\/+$/, "") : ""
+      const rawUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || ""
+      const baseUrl = rawUrl ? String(rawUrl).trim().replace(/\/+$/, "") : ""
       const res = await fetch(`${baseUrl}/api/v1/health`, { cache: "no-store" })
       if (res.ok) {
         const data = await res.json()

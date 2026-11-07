@@ -1,6 +1,7 @@
 import type { QRState, QRPreviewResponse } from "@/types/qr"
 
-const BASE_URL = import.meta.env.VITE_API_URL ? String(import.meta.env.VITE_API_URL).replace(/\/+$/, "") : ""
+const rawEnvUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || ""
+const BASE_URL = rawEnvUrl ? String(rawEnvUrl).trim().replace(/\/+$/, "") : ""
 const API_BASE = `${BASE_URL}/api/v1/qr`
 
 export function resolveQRData(state: QRState): string {
